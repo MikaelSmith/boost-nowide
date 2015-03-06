@@ -3,13 +3,15 @@ compiler:
   - clang
   - gcc
 install:
-  - sudo apt-get install libboost1.48-all-dev
+  - wget http://www.biicode.com/downloads/latest/ubuntu64 -O bii-ubuntu64.deb
+  - sudo dpkg -i bii-ubuntu64.deb && sudo apt-get -f install
+  - wget https://s3.amazonaws.com/biibinaries/thirdparty/cmake-3.0.2-Linux-64.tar.gz
+  - sudo tar -xzf cmake-3.0.2-Linux-64.tar.gz --strip 1 -C /usr
 script:
-  - mkdir tmp
-  - pushd tmp
-  - cmake ..
-  - make
-  - make test
-  - popd
+  - bii init -l simple
+  - bii find
+  - bii cpp:build -- -j2
+  - cd bii/build
+  - ctest -V 2>&1 | c++filt
 os:
   - linux
