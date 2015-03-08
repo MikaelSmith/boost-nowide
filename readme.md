@@ -9,13 +9,6 @@ This is unofficial fork of [Boost.Nowide by Artyom Beilis](http://cppcms.com/fil
 
 There is [doxygen-generated online documentation for Boost.Nowide](http://cppcms.com/files/nowide/html/).
 
-To build and run tests requires [Biicode](http://www.biicode.com/):
-
-    bii init -l simple
-    bii cpp:build # -- -j if system targets Make
-    cd bii/build
-    ctest
-
 License
 -------
 

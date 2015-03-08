@@ -8,10 +8,13 @@ install:
   - wget https://s3.amazonaws.com/biibinaries/thirdparty/cmake-3.0.2-Linux-64.tar.gz
   - sudo tar -xzf cmake-3.0.2-Linux-64.tar.gz --strip 1 -C /usr
 script:
-  - bii init -l simple
-  - bii find
+  - cd /tmp
+  - bii init boost-nowide
+  - cd boost-nowide
+  - bii new MikaelSmith/boost-nowide
+  - shopt -s dotglob && mv $TRAVIS_BUILD_DIR/* blocks/MikaelSmith/boost-nowide
   - bii cpp:build -- -j2
-  - cd bii/build
+  - cd build
   - ctest -V 2>&1 | c++filt
 os:
   - linux
