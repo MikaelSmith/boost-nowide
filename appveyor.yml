@@ -4,8 +4,6 @@ clone_folder: c:\projects\boost-nowide
 os: unstable
 environment:
   BOOST_ROOT: c:\Libraries\boost
-  block_user: MikaelSmith
-  block_name: boost-nowide
 platform:
   - Win32
   - x64
@@ -19,13 +17,11 @@ install:
 before_build:
   - if "%PLATFORM%" == "Win32" set CMAKE_GENERATOR="Visual Studio 12"
   - if "%PLATFORM%" == "x64"   set CMAKE_GENERATOR="Visual Studio 12 Win64"
-  - cd \
-  - bii init boost-nowide
-  - cd boost-nowide
-  - bii new %block_user%/%block_name%
-  - xcopy "%APPVEYOR_BUILD_FOLDER%" blocks\%block_user%\%block_name%\ /e
-  - bii cpp:configure -G %CMAKE_GENERATOR% -DCMAKE_BUILD_TYPE=%Configuration%
+  - if "%PLATFORM%" == "Win32" set BOOST_DEFINITIONS=-DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_LIBRARYDIR="%BOOST_ROOT%/lib32-msvc-12.0"
+  - if "%PLATFORM%" == "x64"   set BOOST_DEFINITIONS=-DBOOST_ROOT="%BOOST_ROOT%" -DBOOST_LIBRARYDIR="%BOOST_ROOT%/lib64-msvc-12.0"
+  - bii init -l simple
+  - bii cpp:configure -G %CMAKE_GENERATOR% -DCMAKE_BUILD_TYPE=%Configuration% %BOOST_DEFINITIONS%
 build_script:
   - bii cpp:build
 test_script:
-  - cd \boost-nowide\build && ctest -C %Configuration%
+  - cd c:\projects\boost-nowide\bii\build && ctest -C %Configuration%
