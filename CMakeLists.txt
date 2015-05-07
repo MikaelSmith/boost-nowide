@@ -1,7 +1,6 @@
 # Setup Biicode
 include(${CMAKE_HOME_DIRECTORY}/biicode.cmake)
 include(biicode/boost/setup)
-INIT_BIICODE_BLOCK()
 
 # Remove empty sources if not on Windows
 if(NOT WIN32)
@@ -18,7 +17,7 @@ if(WIN32)
     SET(BII_test_env_win_SYSTEM_HEADERS ${BII_test_env_SYSTEM_HEADERS})
 endif()
 
-ADD_BIICODE_TARGETS()
+ADD_BII_TARGETS()
 
 # Include Boost and local includes
 bii_find_boost()

@@ -12,7 +12,7 @@ There is [doxygen-generated online documentation for Boost.Nowide](http://cppcms
 To build and run tests requires [Biicode](http://www.biicode.com/):
 
     bii init -l simple
-    bii cpp:build # -- -j if system targets Make
+    bii build # -- -j if system targets Make
     cd bii/build
     ctest
 
